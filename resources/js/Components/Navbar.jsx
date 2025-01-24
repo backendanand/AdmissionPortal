@@ -22,9 +22,14 @@ export default function Navbar() {
                 <ul className="navbar-nav">
                     {
                         auth ?
-                            <li className="nav-item">
-                                <Link className="nav-link" href="/auth/logout">Logout</Link>
-                            </li>
+                            <>
+                                <li>
+                                    <Link className="nav-link" href="/profile">{auth.name}</Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link className="nav-link btn btn-sm btn-danger" href="/auth/logout">Logout</Link>
+                                </li>
+                            </>
                             :
                             <>
                                 <li className="nav-item">

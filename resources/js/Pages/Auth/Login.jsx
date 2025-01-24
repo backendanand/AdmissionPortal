@@ -1,50 +1,43 @@
-import React, { useState } from 'react'
-import { router } from '@inertiajs/react'
+import React from 'react'
+import { Link, useForm } from '@inertiajs/react'
 
 export default function Register() {
-    const [values, setValues] = useState({
+    const { data, setData, post, processing, errors } = useForm({
         email: "",
         password: "",
     })
 
-    function handleChange(e) {
-        const key = e.target.id;
-        const value = e.target.value
-        setValues(values => ({
-            ...values,
-            [key]: value,
-        }))
-    }
-
     function handleSubmit(e) {
         e.preventDefault()
-        router.post('/auth/login', values)
+        post('/auth/login')
     }
     return (
-        <div class="container mt-5">
-            <div class="row justify-content-center">
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-header bg-primary text-white text-center">
+        <div className="container my-5">
+            <div className="row">
+                <div className="col-md-6 offset-md-3">
+                    <div className="card">
+                        <div className="card-header bg-primary text-white text-center">
                             <h4>Login</h4>
                         </div>
-                        <div class="card-body">
+                        <div className="card-body">
                             <form onSubmit={handleSubmit}>
-                                <div class="mb-3">
-                                    <label for="email" class="form-label">Email Address</label>
-                                    <input type="email" class="form-control" id="email" value={values.email} onChange={handleChange} placeholder="Enter your email" required />
+                                <div className="mb-3">
+                                    <label htmlFor="email" className="form-label">Email Address</label>
+                                    <input type="email" className="form-control" id="email" value={data.email} onChange={e => setData('email', e.target.value)} placeholder="Enter your email" required />
+                                    {errors.email && <div className='text-danger text-sm'>{errors.email}</div>}
                                 </div>
-                                <div class="mb-3">
-                                    <label for="password" class="form-label">Password</label>
-                                    <input type="password" class="form-control" id="password" value={values.password} onChange={handleChange} placeholder="Enter your password" required />
+                                <div className="mb-3">
+                                    <label htmlFor="password" className="form-label">Password</label>
+                                    <input type="password" className="form-control" id="password" value={data.password} onChange={e => setData('password', e.target.value)} placeholder="Enter your password" required />
+                                    {errors.password && <div className='text-danger text-sm'>{errors.password}</div>}
                                 </div>
-                                <div class="d-grid">
-                                    <button type="submit" class="btn btn-primary">Login</button>
+                                <div className="d-grid">
+                                    <button type="submit" className="btn btn-primary" disabled={processing}>Login</button>
                                 </div>
                             </form>
                         </div>
-                        <div class="card-footer text-center">
-                            <small>Don't have an account? <a href="#" class="text-primary">Register</a></small>
+                        <div className="card-footer text-center">
+                            <small>Don't have an account? <Link href="/auth/register" className="text-primary">Register</Link></small>
                         </div>
                     </div>
                 </div>
