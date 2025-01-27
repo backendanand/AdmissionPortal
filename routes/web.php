@@ -23,7 +23,7 @@ Route::prefix('auth')->group(function(){
 
 // ADMIN ROUTES
 Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function(){
-    Route::get('/dashboard', function () {
-        return inertia('Admin/Dashboard');
-    });
+    Route::get('/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('admin.dashboard');
+
+    Route::resource('courses', App\Http\Controllers\Admin\CourseController::class);
 });
