@@ -1,6 +1,6 @@
 import React from 'react'
-import Navbar from '../Components/Navbar'
-import Footer from '../Components/Footer'
+import Navbar from '../../Components/Client/Navbar'
+import Footer from '../../Components/Client/Footer'
 
 export default function Layout({ renderBody }) {
     return (

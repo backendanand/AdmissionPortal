@@ -1,7 +1,17 @@
 import React from 'react'
+import { Head } from '@inertiajs/react'
+import AdminLayout from '../../Layouts/Admin/AdminLayout'
 
-export default function Dashboard() {
+
+function Dashboard() {
     return (
-        <div>Dashboard</div>
+        <>
+            <Head title="Dashboard"></Head>
+            <div>Dashboard</div>
+        </>
     )
 }
+
+Dashboard.layout = page => <AdminLayout children={page} />
+
+export default Dashboard
