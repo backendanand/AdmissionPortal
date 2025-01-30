@@ -25,7 +25,7 @@ function Create() {
                     <div className="col">
                         <div className="d-flex align-items-center justify-content-between mb-3">
                             <h1>Courses</h1>
-                            <Link href='/admin/courses' className='btn btn-primary'>View Course</Link>
+                            <Link href='/admin/courses' className='btn btn-primary'><i class="fa-solid fa-list"></i> View Course</Link>
                         </div>
                         <div className='card card-body'>
                             <form onSubmit={handleSubmit}>
@@ -55,7 +55,7 @@ function Create() {
                                     {errors.fees && <div className='text-danger text-sm'>{errors.fees}</div>}
                                 </div>
                                 <div>
-                                    <button disabled={processing} type='submit' className='btn btn-primary'>Save</button>
+                                    <button disabled={processing} type='submit' className='btn btn-success'><i class="fa-solid fa-circle-check"></i> Save</button>
                                 </div>
                             </form>
                         </div>

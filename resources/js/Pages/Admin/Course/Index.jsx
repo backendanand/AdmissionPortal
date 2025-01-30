@@ -18,7 +18,9 @@ function Index({ courses }) {
                     <div className="col">
                         <div className="d-flex align-items-center justify-content-between mb-3">
                             <h1>Courses</h1>
-                            <Link href='/admin/courses/create' className='btn btn-primary'>Create</Link>
+                            <Link href='/admin/courses/create' className='btn btn-primary'>
+                                <i class="fa-solid fa-circle-plus"></i> Add New
+                            </Link>
                         </div>
                         <div className='card card-body'>
                             <div className="table-responsive">
@@ -42,9 +44,12 @@ function Index({ courses }) {
                                                         <td>{course.duration}</td>
                                                         <td>${course.fees}</td>
                                                         <td>
-                                                            <Link className='btn btn-info btn-sm' href={`/admin/courses/${course.id}/edit`}>Edit</Link>
-                                                            <form onSubmit={(e) => handleDelete(e, course.id)}>
-                                                                <button className='btn btn-danger btn-sm' type="submit">Delete</button>
+                                                            <Link className='btn btn-info btn-sm inline-block' href={`/admin/courses/${course.id}/edit`}>
+                                                                <i class="fa-solid fa-pen-to-square"></i></Link>
+                                                            <form className='inline-block' onSubmit={(e) => handleDelete(e, course.id)}>
+                                                                <button className='btn btn-danger btn-sm' type="submit">
+                                                                    <i class="fa-solid fa-trash-can"></i>
+                                                                </button>
                                                             </form>
                                                         </td>
                                                     </tr>
@@ -57,11 +62,17 @@ function Index({ courses }) {
                                     {
                                         courses.links.map((link, index) => {
                                             return (
-                                                <Link
-                                                    key={index}
-                                                    href={link.url}
-                                                    className={`btn ${link.active ? 'btn-primary' : 'btn-light'}`}
-                                                    dangerouslySetInnerHTML={{ __html: link.label }} />
+                                                link.url ?
+                                                    <Link
+                                                        key={index}
+                                                        href={link.url}
+                                                        className={`mx-1 btn ${link.active ? 'btn-primary' : 'btn-light'}`}
+                                                        dangerouslySetInnerHTML={{ __html: link.label }} />
+                                                    :
+                                                    <span
+                                                        key={index}
+                                                        className='bg-light p-2 rounded text-muted cursor-not-allowed'
+                                                        dangerouslySetInnerHTML={{ __html: link.label }} ></span>
                                             )
                                         })
                                     }
