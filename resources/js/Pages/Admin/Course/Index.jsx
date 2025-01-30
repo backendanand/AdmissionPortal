@@ -1,8 +1,15 @@
 import React from 'react'
 import AdminLayout from '../../../Layouts/Admin/AdminLayout'
-import { Head, Link } from '@inertiajs/react';
+import { Head, Link, useForm } from '@inertiajs/react';
 
 function Index({ courses }) {
+    const { delete: destroy } = useForm();
+
+    function handleDelete(e, courseId) {
+        e.preventDefault()
+
+        destroy(`/admin/courses/${courseId}`);
+    }
     return (
         <>
             <Head title='Courses'></Head>
@@ -36,6 +43,9 @@ function Index({ courses }) {
                                                         <td>${course.fees}</td>
                                                         <td>
                                                             <Link className='btn btn-info btn-sm' href={`/admin/courses/${course.id}/edit`}>Edit</Link>
+                                                            <form onSubmit={(e) => handleDelete(e, course.id)}>
+                                                                <button className='btn btn-danger btn-sm' type="submit">Delete</button>
+                                                            </form>
                                                         </td>
                                                     </tr>
                                                 )

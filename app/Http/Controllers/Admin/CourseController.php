@@ -54,4 +54,14 @@ class CourseController extends Controller
             return redirect('/admin/courses')->with('error', 'Course cannot be updated. Please try again.');
         }
     }
+
+    public function destroy(Course $course){
+        try{
+            $course->delete();
+            return redirect('/admin/courses')->with('success', 'Course deleted successfully.');
+        }
+        catch(\Exception $e){
+            return redirect('/admin/courses')->with('error', 'Course cannot be updated. Please try again.');
+        }
+    }
 }
