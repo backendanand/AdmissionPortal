@@ -31,4 +31,27 @@ class CourseController extends Controller
 
         return redirect('/admin/courses')->with('success', 'Course created successfully.');
     }
+
+    public function edit(Course $course){
+        return inertia('Admin/Course/Edit', ['course' => $course]);
+    }
+
+    public function update(Request $request, Course $course){
+        try{
+            $validated = $request->validate([
+                'name' => 'required|string|max:255',
+                'description' => 'required|string|max:255',
+                'duration' => 'required',
+                'fees' => 'required',
+                'eligibility' => 'required|string|max:255',
+            ]);
+    
+            $course->update($validated);
+    
+            return redirect('/admin/courses')->with('success', 'Course updated successfully.');
+        }
+        catch(\Exception $e){
+            return redirect('/admin/courses')->with('error', 'Course cannot be updated. Please try again.');
+        }
+    }
 }

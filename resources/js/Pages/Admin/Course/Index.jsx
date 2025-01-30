@@ -34,7 +34,9 @@ function Index({ courses }) {
                                                         <td>{course.name}</td>
                                                         <td>{course.duration}</td>
                                                         <td>${course.fees}</td>
-                                                        <td></td>
+                                                        <td>
+                                                            <Link className='btn btn-info btn-sm' href={`/admin/courses/${course.id}/edit`}>Edit</Link>
+                                                        </td>
                                                     </tr>
                                                 )
                                             })
