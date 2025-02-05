@@ -16,6 +16,9 @@ export default function Navbar() {
                         <li className="nav-item">
                             <Link className="nav-link" href="/">Home</Link>
                         </li>
+                        <li className="nav-item">
+                            <Link className="nav-link" href="/apply">Apply Now</Link>
+                        </li>
                     </ul>
                 </div>
 
