@@ -28,3 +28,10 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function(){
 
     Route::resource('courses', App\Http\Controllers\Admin\CourseController::class);
 });
+
+// API ROUTES
+Route::prefix('api')->group(function(){
+    Route::get('/countries', [App\Http\Controllers\Api\AddressController::class, 'getCountries']);
+    Route::get('/states/{countryId}', [App\Http\Controllers\Api\AddressController::class, 'getStates']);
+    Route::get('/cities/{stateId}', [App\Http\Controllers\Api\AddressController::class, 'getCities']);
+});
