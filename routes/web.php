@@ -21,6 +21,8 @@ Route::prefix('auth')->group(function(){
 
 // CLIENT ROUTES
 Route::get('/apply', [App\Http\Controllers\Client\ApplicantController::class, 'index'])->name('apply');
+Route::post('/apply', [App\Http\Controllers\Client\ApplicantController::class, 'store'])->name('apply');
+
 
 // ADMIN ROUTES
 Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function(){
