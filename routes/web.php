@@ -23,6 +23,12 @@ Route::prefix('auth')->group(function(){
 Route::get('/apply', [App\Http\Controllers\Client\ApplicantController::class, 'index'])->name('apply');
 Route::post('/apply', [App\Http\Controllers\Client\ApplicantController::class, 'store'])->name('apply');
 
+// APLICANT ROUTES
+Route::prefix('applicant')->middleware(['auth', 'role:applicant'])->group(function(){
+    Route::get('/dashboard', [App\Http\Controllers\Client\ApplicantController::class, 'dashboard'])->name('dashboard');
+
+});
+
 
 // ADMIN ROUTES
 Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function(){

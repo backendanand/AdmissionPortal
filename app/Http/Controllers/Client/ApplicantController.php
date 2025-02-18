@@ -13,9 +13,13 @@ use App\Models\Applicant;
 
 class ApplicantController extends Controller
 {
+    public function dashboard(){
+        return inertia('Client/Applicant/Dashboard');
+    }
+
     public function index()
     {
-        return inertia('Client/Applicant/Index');
+        return inertia('Client/Applicant/Apply');
     }
 
     public function store(Request $request)

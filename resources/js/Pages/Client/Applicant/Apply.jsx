@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useForm, Link, Head } from '@inertiajs/react'
 import axios from 'axios';
 
-function Index() {
+function Apply() {
     const [countries, setCountries] = useState([])
     const [states, setStates] = useState([])
     const [cities, setCities] = useState([])
@@ -207,4 +207,4 @@ function Index() {
     )
 }
 
-export default Index
+export default Apply
