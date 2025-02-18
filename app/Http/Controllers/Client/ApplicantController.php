@@ -13,11 +13,13 @@ use App\Models\Applicant;
 
 class ApplicantController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         return inertia('Client/Applicant/Index');
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         $basicValidated = $request->validate([
             'first_name' => 'required|string|max:50',
             'middle_name' => 'nullable|string|max:50',
@@ -38,24 +40,26 @@ class ApplicantController extends Controller
             'password' => 'required|string|min:8|max:20|confirmed',
             'password_confirmation' => 'required|string|min:8|max:20'
         ]);
-        try{
-            $password_hash = Hash::make($validated['password']);
-            $fullName = $validated['first_name'] . ' ' . $validated['middle_name'] . ' ' . $validated['last_name']; 
-    
+        try {
+            $password_hash = Hash::make($accountValidated['password']);
+            $fullName = $basicValidated['first_name'] . ' ' . $basicValidated['middle_name'] . ' ' . $basicValidated['last_name'];
+
             DB::transaction(function () use ($fullName, $password_hash, $basicValidated, $accountValidated) {
                 $accountValidated['role_id'] = Role::where('name', '=', 'applicant')->first()->id;
+                $accountValidated['name'] = $fullName;
+                $accountValidated['phone'] = $basicValidated['phone'];
                 $user = User::create($accountValidated);
 
-                dd($user);
-                
+                // dd($user);
+
                 $basicValidated['user_id'] = $user->id;
+                $basicValidated['email'] = $user->email;
                 $applicant = Applicant::create($basicValidated);
             });
 
             return redirect('/')->with('success', 'Account created successfully.');
-        }
-        catch(\Exception $e){
-            return redirect()->back()->with('error', 'Something went wrong! Please try again later.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Something went wrong! Please try again later.' . $e->getMessage());
         }
     }
 }

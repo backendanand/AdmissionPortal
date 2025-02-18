@@ -9,6 +9,7 @@ class Applicant extends Model
     protected $table = 'applicants';
 
     protected $fillable = [
+        'user_id',
         'first_name',
         'middle_name',
         'last_name',
