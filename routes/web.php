@@ -27,6 +27,8 @@ Route::post('/apply', [App\Http\Controllers\Client\ApplicantController::class, '
 Route::prefix('applicant')->middleware(['auth', 'role:applicant'])->group(function(){
     Route::get('/dashboard', [App\Http\Controllers\Client\ApplicantController::class, 'dashboard'])->name('dashboard');
 
+    Route::get('/profile/edit/{applicant}', [App\Http\Controllers\Client\ApplicantController::class, 'edit'])->name('applicant.profile.edit');
+
 });
 
 

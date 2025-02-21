@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
-import { Head, Link } from '@inertiajs/react'
+import { Head, Link, usePage } from '@inertiajs/react'
 
 import avatar from "@/assets/img/avatar-male.png";
 
-export default function Dashboard() {
+export default function Dashboard({ applicant }) {
+    const { auth } = usePage().props;
+
     const [profileComplete, setProfileComplete] = useState(false);
     const [appliedForPost, setAppliedForPost] = useState(false);
 
@@ -22,7 +24,7 @@ export default function Dashboard() {
                                 alt="Profile"
                                 className="rounded-circle mx-auto mb-2"
                             />
-                            <h5>John Doe</h5>
+                            <h5>{`${applicant.first_name} ${applicant.middle_name ?? ""} ${applicant.last_name}`}</h5>
                             <p className="text-muted">Software Engineer</p>
                         </div>
                         <div>
@@ -30,12 +32,12 @@ export default function Dashboard() {
                                 !profileComplete || !appliedForPost ? (
                                     <ul className="list-group">
                                         <li className={`list-group-item ${profileComplete ? 'text-success' : 'text-danger'}`}>
-                                            <Link href="/client/applicant/profile/edit">
+                                            <Link href={`/applicant/profile/edit/${applicant.id}`}>
                                                 <i className="fas fa-check-circle"></i> Complete your profile
                                             </Link>
                                         </li>
                                         <li className={`list-group-item ${appliedForPost ? 'text-success' : 'text-danger'}`}>
-                                            <Link href="/client/applicant/apply">
+                                            <Link href="/applicant/apply">
                                                 <i className="fas fa-check-circle"></i> Apply for a post
                                             </Link>
                                         </li>

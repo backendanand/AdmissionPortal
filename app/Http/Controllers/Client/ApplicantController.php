@@ -14,7 +14,8 @@ use App\Models\Applicant;
 class ApplicantController extends Controller
 {
     public function dashboard(){
-        return inertia('Client/Applicant/Dashboard');
+        $applicant = Applicant::where('user_id', auth()->user()->id)->first();
+        return inertia('Client/Applicant/Dashboard', ['applicant' => $applicant]);
     }
 
     public function index()
@@ -65,5 +66,9 @@ class ApplicantController extends Controller
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Something went wrong! Please try again later.' . $e->getMessage());
         }
+    }
+
+    public function edit(Applicant $applicant){
+        return inertia('Client/Applicant/Edit', ['applicant' => $applicant]);
     }
 }
